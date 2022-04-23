@@ -2,7 +2,10 @@
   "entryPoints": [
     "./src/ejercicioPe/abstract.ts",
     "./src/ejercicioPe/addReduce.ts",
-    "./src/ejercicioPe/subReduce.ts"
+    "./src/ejercicioPe/subReduce.ts",
+    "./src/app/argv.ts",
+    "./src/app/manager.ts",
+    "./src/app/note.ts"
   ],
   "out": "./docs"
 }
