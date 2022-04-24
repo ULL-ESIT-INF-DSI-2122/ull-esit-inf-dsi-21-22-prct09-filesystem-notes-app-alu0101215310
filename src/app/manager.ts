@@ -43,7 +43,7 @@ export class Manager {
         fs.writeFileSync(`src/app/notes/${this.user}/${title}.json`,
             note.json());
         console.log(chalk.green('Se modificó la nota correctamente'));
-      } else console.log('No existe una nota con ese nombre');
+      } else console.log(chalk.red('No existe una nota con ese nombre'));
     } else console.log(chalk.red('No existe registro del usuario'));
   }
 
@@ -56,10 +56,12 @@ export class Manager {
       if (fs.existsSync(`src/app/notes/${this.user}/${title}.json`)) {
         fs.rmSync(`src/app/notes/${this.user}/${title}.json`);
         console.log(chalk.green('Se eliminó la nota correctamente'));
-      } else console.log('No existe una nota con ese nombre');
+      } else console.log(chalk.red('No existe una nota con ese nombre'));
     } else console.log(chalk.red('No existe registro del usuario'));
-    if (fs.readdirSync(`src/app/notes/${this.user}`).length === 0) {
-      fs.rmdirSync(`src/app/notes/${this.user}`);
+    if (fs.existsSync(`src/app/notes/${this.user}`)) {
+      if (fs.readdirSync(`src/app/notes/${this.user}`).length === 0) {
+        fs.rmdirSync(`src/app/notes/${this.user}`);
+      }
     }
   }
 
@@ -89,8 +91,12 @@ export class Manager {
             console.log(chalk.green(`${note.title}`));
             console.log(chalk.green(`${note.body}`));
             break;
+          default:
+            console.log(`${note.title}`);
+            console.log(`${note.body}`);
+            break;
         }
-      } else console.log('No existe una nota con ese nombre');
+      } else console.log(chalk.red('No existe una nota con ese nombre'));
     } else console.log(chalk.red('No existe registro del usuario'));
   }
 
@@ -115,6 +121,9 @@ export class Manager {
             break;
           case 'green':
             console.log(chalk.green(`${note.title}`));
+            break;
+          default:
+            console.log(`${note.title}`);
             break;
         }
       });
